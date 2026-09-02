@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiveScripts - Premium FiveM Scripts</title>
+    <style>
+        :root {
+            --bg-dark: #0f0f12;
+            --card-bg: #1a1a20;
+            --accent: #7c3aed;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 4rem;
+            background-color: #141418;
+            border-bottom: 1px solid #27272a;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; }
+        .nav-links a { color: var(--text-muted); margin: 0 1rem; text-decoration: none; }
+        .nav-links a:hover { color: #fff; }
+
+        .btn-purple {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 1rem;
+            background: radial-gradient(circle at center, #1f1137 0%, var(--bg-dark) 70%);
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
+        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto; }
+
+        /* Products Grid */
+        .container { padding: 2rem 4rem; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #27272a;
+        }
+
+        .product-card img { width: 100%; height: 160px; object-fit: cover; }
+        .product-info { padding: 1rem; }
+        .product-info h3 { margin: 0 0 0.5rem 0; }
+        .price-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">⚡ FiveScripts</div>
+        <div class="nav-links">
+            <a href="#">Marketplace</a>
+            <a href="#">Discord</a>
+            <a href="#">Support</a>
+        </div>
+        <a href="#dashboard" class="btn-purple" id="auth-btn">Dashboard</a>
+    </nav>
+
+    <section class="hero">
+        <h1>FiveScripts</h1>
+        <p>Discover, rate, and download the community's best scripts made with care for performance, security, and fun.</p>
+        <button class="btn-purple">Submit your Script</button>
+    </section>
+
+    <div class="container">
+        <h2>Popular Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x160" alt="Script">
+                <div class="product-info">
+                    <h3>BW PAUSE MENU</h3>
+                    <p style="color:var(--text-muted); font-size:0.85rem;">Clean and modern UI pause menu</p>
+                    <div class="price-bar">
+                        <span>€14.99</span>
+                        <button class="btn-purple" onclick="redirectToCheckout('BW Pause Menu', 14.99)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <script>
+        function redirectToCheckout(productName, price) {
+            // Ide jön a Tebex vagy Stripe fizetési átirányítás
+            alert("Redirecting to payment for " + productName + " (" + price + " EUR)...");
+        }
+    </script>
+</body>
+</html>
