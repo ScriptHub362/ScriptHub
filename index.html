@@ -3,21 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiveScripts - Premium FiveM Scripts</title>
+    <title>ScriptHub - Premium FiveM Scripts & Resources</title>
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0f0f12;
-            --card-bg: #1a1a20;
-            --accent: #7c3aed;
+            --bg-card: #18181c;
+            --bg-card-hover: #222228;
+            --border-color: #27272a;
+            --accent-orange: #ff6b00;
+            --accent-orange-hover: #e05e00;
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
         }
 
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+
+        body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Announcement Bar */
+        .announcement {
+            background-color: #1f140e;
+            color: #ffaa66;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .announcement a {
+            color: var(--accent-orange);
+            text-decoration: underline;
+            margin-left: 0.5rem;
         }
 
         /* Navbar */
@@ -25,97 +57,304 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 4rem;
+            padding: 1.2rem 5%;
             background-color: #141418;
-            border-bottom: 1px solid #27272a;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; }
-        .nav-links a { color: var(--text-muted); margin: 0 1rem; text-decoration: none; }
-        .nav-links a:hover { color: #fff; }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
 
-        .btn-purple {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            cursor: pointer;
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            background-color: #1a1a20;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .btn {
+            background-color: var(--accent-orange);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-orange-hover);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: #27272a;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 5rem 1rem;
-            background: radial-gradient(circle at center, #1f1137 0%, var(--bg-dark) 70%);
+            padding: 6rem 1rem;
+            background: radial-gradient(circle at center, #2e1708 0%, var(--bg-dark) 70%);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .hero h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
-        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto; }
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
 
-        /* Products Grid */
-        .container { padding: 2rem 4rem; }
+        .hero p {
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* Products Section */
+        .container {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
         .product-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
+            background-color: var(--bg-card);
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #27272a;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
-        .product-card img { width: 100%; height: 160px; object-fit: cover; }
-        .product-info { padding: 1rem; }
-        .product-info h3 { margin: 0 0 0.5rem 0; }
-        .price-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 107, 0, 0.4);
+            background-color: var(--bg-card-hover);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background-color: #27272a;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 1.25rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .product-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 1.2rem;
+        }
+
+        .price-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background-color: #141418;
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Top Announcement Bar -->
+    <div class="announcement">
+        The new MRPD MLO recently released on Kingmaps.net <a href="#">Click Here &rarr;</a>
+    </div>
+
+    <!-- Navigation -->
     <nav>
-        <div class="logo">⚡ FiveScripts</div>
+        <a href="#" class="logo">
+            <span>⚡</span> ScriptHub
+        </a>
         <div class="nav-links">
             <a href="#">Marketplace</a>
-            <a href="#">Discord</a>
+            <a href="https://discord.gg/jRawypFEve" target="_blank">Discord</a>
             <a href="#">Support</a>
         </div>
-        <a href="#dashboard" class="btn-purple" id="auth-btn">Dashboard</a>
+        <div class="nav-actions">
+            <input type="text" class="search-box" placeholder="Search...">
+            <a href="#login" class="btn btn-outline">Login</a>
+        </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>FiveScripts</h1>
+        <h1>ScriptHub</h1>
         <p>Discover, rate, and download the community's best scripts made with care for performance, security, and fun.</p>
-        <button class="btn-purple">Submit your Script</button>
+        <div class="hero-buttons">
+            <button class="btn">Submit your Script &rarr;</button>
+            <button class="btn btn-outline">Need Help?</button>
+        </div>
     </section>
 
+    <!-- Popular Products -->
     <div class="container">
-        <h2>Popular Products</h2>
+        <div class="section-header">
+            <h2>Popular Products</h2>
+            <a href="#" style="color: var(--accent-orange); text-decoration: none; font-weight: 600; font-size: 0.9rem;">Browse all &rarr;</a>
+        </div>
+
         <div class="product-grid">
+            <!-- Product Item 1 -->
             <div class="product-card">
-                <img src="https://via.placeholder.com/300x160" alt="Script">
+                <img src="https://via.placeholder.com/400x250/1a1a20/ff6b00?text=BW+PAUSE+MENU" alt="Pause Menu" class="product-image">
                 <div class="product-info">
                     <h3>BW PAUSE MENU</h3>
-                    <p style="color:var(--text-muted); font-size:0.85rem;">Clean and modern UI pause menu</p>
+                    <p>Clean and modern UI pause menu for QB-Core and ESX framework.</p>
                     <div class="price-bar">
-                        <span>€14.99</span>
-                        <button class="btn-purple" onclick="redirectToCheckout('BW Pause Menu', 14.99)">Buy Now</button>
+                        <span class="price">€14.99</span>
+                        <button class="btn" onclick="redirectToCheckout('BW Pause Menu', 14.99)">Buy Now</button>
                     </div>
                 </div>
             </div>
+
+            <!-- Product Item 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/400x250/1a1a20/ff6b00?text=LB+PHONE" alt="LB Phone" class="product-image">
+                <div class="product-info">
+                    <h3>LB PHONE</h3>
+                    <p>Advanced smartphone script featuring realistic apps, smooth UI, and voice calls.</p>
+                    <div class="price-bar">
+                        <span class="price">€29.99</span>
+                        <button class="btn" onclick="redirectToCheckout('LB Phone', 29.99)">Buy Now</button>
+                    </div>
+                </div>
             </div>
+
+            <!-- Product Item 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/400x250/1a1a20/ff6b00?text=TELEVISION" alt="Television" class="product-image">
+                <div class="product-info">
+                    <h3>TELEVISION</h3>
+                    <p>Interactive TV script with video playback support and YouTube integration.</p>
+                    <div class="price-bar">
+                        <span class="price">€9.99</span>
+                        <button class="btn" onclick="redirectToCheckout('Television', 9.99)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 ScriptHub. All rights reserved. Powered by Tebex & FiveM.</p>
+    </footer>
 
     <script>
         function redirectToCheckout(productName, price) {
-            // Ide jön a Tebex vagy Stripe fizetési átirányítás
-            alert("Redirecting to payment for " + productName + " (" + price + " EUR)...");
+            alert("Redirecting to payment for " + productName + " (€" + price + ")...");
         }
     </script>
 </body>
